@@ -5,6 +5,28 @@
 このファイルは、本プロジェクトで作業する AI アシスタント向けの開発ルールです。
 プロジェクト固有の技術スタックや実行方法が追加された場合は、このファイルにも反映してください。
 
+## デプロイ先
+
+https://tanaka472.github.io/task-board/
+
+## 技術スタック
+
+- React と React DOM を使用したフロントエンドアプリケーション。
+- Vite を開発サーバーおよびビルドツールとして使用する。
+- JavaScript（ES Modules）で実装する。現時点では TypeScript は使用しない。
+- UI のスタイリングは標準 CSS（`src/styles.css`）で行う。
+- タスクの永続化にはブラウザの `localStorage` を使用する。
+- GitHub Actions で Vite の本番ビルドを実行し、GitHub Pages にデプロイする。
+
+## 命名規約
+
+- React コンポーネント名とコンポーネントファイル名は PascalCase を使用する（例: `App`、`TaskList`）。
+- 関数名、変数名、state 名は camelCase を使用する（例: `addTask`、`newTask`、`completedCount`）。
+- 定数は camelCase を基本とし、用途が明確な名前を付ける（例: `initialTasks`、`storageKey`）。
+- CSS クラス名は kebab-case を使用する（例: `task-list`、`delete-button`）。
+- イベントハンドラーは `add`、`toggle`、`delete` などの動作を表す動詞で始める。
+- ファイル名は、React コンポーネントは PascalCase、それ以外は既存の構成に合わせて小文字または kebab-case を使用する。
+
 ## 基本方針
 
 - 変更前に関連するファイルと既存の実装を確認する。
