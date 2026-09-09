@@ -1,5 +1,6 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
+const storageKey = 'task-board.tasks'
 const initialTasks = [
   { id: 1, text: '週次ミーティングの準備', completed: true },
   { id: 2, text: 'デザインレビューのフィードバックを整理', completed: false },
@@ -7,8 +8,22 @@ const initialTasks = [
 ]
 
 function App() {
-  const [tasks, setTasks] = useState(initialTasks)
+  const [tasks, setTasks] = useState(() => {
+    try {
+      const savedTasks = localStorage.getItem(storageKey)
+      if (!savedTasks) return initialTasks
+
+      const parsedTasks = JSON.parse(savedTasks)
+      return Array.isArray(parsedTasks) ? parsedTasks : initialTasks
+    } catch {
+      return initialTasks
+    }
+  })
   const [newTask, setNewTask] = useState('')
+
+  useEffect(() => {
+    localStorage.setItem(storageKey, JSON.stringify(tasks))
+  }, [tasks])
 
   const completedCount = tasks.filter((task) => task.completed).length
   const remainingCount = tasks.length - completedCount
